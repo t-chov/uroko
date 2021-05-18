@@ -1,10 +1,46 @@
-from typing import Dict, Iterator, List, Tuple
+from typing import Callable, Dict, Iterator, List
+
+from numpy import log
 
 
 def min_max_scale(
     datapoints: List[Dict],
-    value_keys: Tuple[str],
-    normalized_value_keys: Tuple[str] = tuple("normalized_value"),
+    value_keys: List[str],
+    normalized_value_keys: List[str] = ["normalized_value"],
+    v_min: float = 0.0,
+    v_max: float = 1.0
+) -> Iterator[Dict]:
+    yield from min_max_scale_with_closure(
+        datapoints=datapoints,
+        value_keys=value_keys,
+        normalized_value_keys=normalized_value_keys,
+        f=lambda v: v,
+        v_min=v_min,
+        v_max=v_max
+    )
+
+def min_max_log_scale(
+    datapoints: List[Dict],
+    value_keys: List[str],
+    normalized_value_keys: List[str] = ["normalized_value"],
+    v_min: float = 0.0,
+    v_max: float = 1.0
+) -> Iterator[Dict]:
+    yield from min_max_scale_with_closure(
+        datapoints=datapoints,
+        value_keys=value_keys,
+        normalized_value_keys=normalized_value_keys,
+        f=lambda v: log(v + 1),
+        v_min=v_min,
+        v_max=v_max
+    )
+
+
+def min_max_scale_with_closure(
+    datapoints: List[Dict],
+    value_keys: List[str],
+    normalized_value_keys: List[str] = ["normalized_value"],
+    f: Callable[[float], float] = lambda v: v,
     v_min: float = 0.0,
     v_max: float = 1.0
 ) -> Iterator[Dict]:
@@ -14,11 +50,11 @@ def min_max_scale(
         raise RuntimeError(f'{msg}({detail})')
 
     min_max_list = [
-        (min(d[vkey] for d in datapoints), max(d[vkey] for d in datapoints))
+        (f(min(d[vkey] for d in datapoints)), f(max(d[vkey] for d in datapoints)))
         for vkey in value_keys
     ]
 
-    calc_std = lambda v, minv, maxv: (v - minv) / (maxv - minv)
+    calc_std = lambda v, minv, maxv: (f(v) - minv) / (maxv - minv)
     for datapoint in datapoints:
         for i, (vkey, nvkey) in enumerate(zip(value_keys, normalized_value_keys)):
             rawv = datapoint[vkey]

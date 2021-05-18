@@ -1,5 +1,5 @@
 from pytest import raises
-from uroko import min_max_scale
+from uroko import min_max_log_scale, min_max_scale
 
 
 def test_min_max_scale_value_error():
@@ -47,4 +47,25 @@ def test_min_max_scale():
             "nage": 1.0,
         },
     ]
-    assert list(min_max_scale(input, ("age", "height"), ("nage", "height"))) == expected
+    assert list(min_max_scale(input, ["age", "height"], ["nage", "height"])) == expected
+
+
+def test_min_max_log_scale():
+    input = [
+        {
+            "name": "Kyoto",
+            "point": 10000,
+        },
+        {
+            "name": "Okayama",
+            "point": 10,
+        },
+        {
+            "name": "Gumma",
+            "point": 1,
+        },
+    ]
+    actual = list(min_max_log_scale(input, ["point"], ["point"], 1.0, 2.0))
+    assert actual[0]["point"] == 2.0
+    assert round(actual[1]["point"], 5) == 1.20015
+    assert actual[2]["point"] == 1.0
