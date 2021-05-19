@@ -1,10 +1,11 @@
-from typing import Callable, Dict, Iterator, List
+from itertools import tee
+from typing import Callable, Dict, Iterable, Iterator, List
 
 from numpy import log
 
 
 def min_max_scale(
-    datapoints: List[Dict],
+    datapoints: Iterable[Dict],
     value_keys: List[str],
     normalized_value_keys: List[str] = ["normalized_value"],
     v_min: float = 0.0,
@@ -20,7 +21,7 @@ def min_max_scale(
     )
 
 def min_max_log_scale(
-    datapoints: List[Dict],
+    datapoints: Iterable[Dict],
     value_keys: List[str],
     normalized_value_keys: List[str] = ["normalized_value"],
     v_min: float = 0.0,
@@ -37,7 +38,7 @@ def min_max_log_scale(
 
 
 def min_max_scale_with_closure(
-    datapoints: List[Dict],
+    datapoints: Iterable[Dict],
     value_keys: List[str],
     normalized_value_keys: List[str] = ["normalized_value"],
     f: Callable[[float], float] = lambda v: v,
@@ -49,15 +50,20 @@ def min_max_scale_with_closure(
         detail = f'v: `{"/".join(value_keys)}` n:`{"/".join(normalized_value_keys)}`'
         raise RuntimeError(f'{msg}({detail})')
 
+    # to use huge datapoints, use iterators
+    rows, predata = tee(datapoints)
+    values = []
+    for vkey in value_keys:
+        values.append([float(d[vkey]) for d in predata])
+        _, predata = tee(datapoints)
     min_max_list = [
-        (f(min(d[vkey] for d in datapoints)), f(max(d[vkey] for d in datapoints)))
-        for vkey in value_keys
+        (f(min(values[i])), f(max(values[i]))) for i, _ in enumerate(value_keys)
     ]
 
     calc_std = lambda v, minv, maxv: (f(v) - minv) / (maxv - minv)
-    for datapoint in datapoints:
+    for datapoint in rows:
         for i, (vkey, nvkey) in enumerate(zip(value_keys, normalized_value_keys)):
-            rawv = datapoint[vkey]
+            rawv = float(datapoint[vkey])
             minv = min_max_list[i][0]
             maxv = min_max_list[i][1]
             datapoint[nvkey] = calc_std(rawv, minv, maxv) * (v_max - v_min) + v_min
