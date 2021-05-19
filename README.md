@@ -1,6 +1,6 @@
 # uroko
 
-[![CircleCI](https://circleci.com/gh/t-chov/uroko.svg?style=svg)][circle ci]
+![CircleCI](https://circleci.com/gh/t-chov/uroko.svg?style=svg)
 
 Data scaling tool for CSV/TSV
 
