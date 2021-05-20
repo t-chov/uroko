@@ -22,6 +22,7 @@ pytest-flake8 = "^1.0.7"
 pytest-mccabe = "^2.0"
 pytest-mypy = "^0.8.1"
 pytest-mock = "^3.6.1"
+codecov = "^2.1.11"
 
 [tool.pytest.ini_options]
 addopts = [
