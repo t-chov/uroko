@@ -1,8 +1,8 @@
 # uroko
 
-![PyPI version](https://badge.fury.io/py/uroko.svg)
-![CircleCI](https://circleci.com/gh/t-chov/uroko.svg?style=svg)
-![Codecov](https://codecov.io/gh/t-chov/uroko/branch/main/graph/badge.svg)
+[![PyPI version](https://badge.fury.io/py/uroko.svg)](https://pypi.org/project/uroko/)
+[![CircleCI](https://circleci.com/gh/t-chov/uroko.svg?style=svg)](https://app.circleci.com/pipelines/github/t-chov/uroko)
+[![Codecov](https://codecov.io/gh/t-chov/uroko/branch/main/graph/badge.svg)](https://app.codecov.io/gh/t-chov/uroko)
 
 Data scaling tool for CSV/TSV
 
