@@ -17,8 +17,19 @@ from uroko import min_max_scale
     type=str,
     multiple=True
 )
-@option('--csv', 'delimiter', flag_value=",", default=True)
-@option('--tsv', 'delimiter', flag_value="\t")
+@option(
+    '--csv',
+    'delimiter',
+    flag_value=",",
+    help='load as csv',
+    default=True
+)
+@option(
+    '--tsv',
+    'delimiter',
+    flag_value="\t",
+    help='load as tsv'
+)
 def main(
     input: TextIO,
     output: TextIO,

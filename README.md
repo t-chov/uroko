@@ -18,6 +18,8 @@ Usage: uroko-cli [OPTIONS] [INPUT] [OUTPUT]
 Options:
   --version           Show the version and exit.
   -c, --columns TEXT  columns to scale
+  --csv               load as csv
+  --tsv               load as tsv
   --help              Show this message and exit.
 ```
 
