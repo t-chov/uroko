@@ -3,7 +3,7 @@ authors = ["Kohei Tsuyuki <kotsuyuki@gmail.com>"]
 description = "Data scaling tool for CSV/TSV"
 license = "MIT"
 name = "uroko"
-version = "0.1.0"
+version = "0.2.0"
 
 [tool.poetry.dependencies]
 click = "^8.0.0"
@@ -15,14 +15,14 @@ uroko-cli = "uroko.cli:main"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.7"
+codecov = "^2.1.11"
 isort = "^5.8.0"
 pytest = "^6.2.4"
 pytest-cov = "^2.12.0"
 pytest-flake8 = "^1.0.7"
 pytest-mccabe = "^2.0"
-pytest-mypy = "^0.8.1"
 pytest-mock = "^3.6.1"
-codecov = "^2.1.11"
+pytest-mypy = "^0.8.1"
 
 [tool.pytest.ini_options]
 addopts = [
