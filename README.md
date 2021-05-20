@@ -1,6 +1,8 @@
 # uroko
 
+![PyPI version](https://badge.fury.io/py/preacher.svg)
 ![CircleCI](https://circleci.com/gh/t-chov/uroko.svg?style=svg)
+![Codecov](https://codecov.io/gh/ymoch/preacher/branch/master/graph/badge.svg)
 
 Data scaling tool for CSV/TSV
 
