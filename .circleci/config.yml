@@ -47,3 +47,7 @@ commands:
           command: |
             poetry install
             poetry run pytest
+      - run:
+          name: Report
+          command: |
+            poetry run codecov
