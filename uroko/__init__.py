@@ -1,8 +1,11 @@
 from itertools import tee
 from typing import Callable, Dict, Iterable, Iterator, List
 
-from numpy import log
+from numpy import log, sqrt
 
+FUNC_ASIS = lambda x: x
+FUNC_LOG = lambda x: log(x + 1)
+FUNC_SQRT = lambda x: sqrt(x)
 
 def min_max_scale(
     datapoints: Iterable[Dict],
@@ -15,7 +18,7 @@ def min_max_scale(
         datapoints=datapoints,
         value_keys=value_keys,
         normalized_value_keys=normalized_value_keys,
-        f=lambda v: v,
+        f=FUNC_ASIS,
         v_min=v_min,
         v_max=v_max
     )
@@ -31,7 +34,7 @@ def min_max_log_scale(
         datapoints=datapoints,
         value_keys=value_keys,
         normalized_value_keys=normalized_value_keys,
-        f=lambda v: log(v + 1),
+        f=FUNC_LOG,
         v_min=v_min,
         v_max=v_max
     )

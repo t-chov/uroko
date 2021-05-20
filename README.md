@@ -16,14 +16,17 @@ Input CSV/TSV data, output min-max scaled data with some functions.
 Usage: uroko-cli [OPTIONS] [INPUT] [OUTPUT]
 
 Options:
-  --version           Show the version and exit.
-  -c, --columns TEXT  columns to scale
-  --csv               load as csv
-  --tsv               load as tsv
-  --help              Show this message and exit.
+  --version               Show the version and exit.
+  -c, --columns TEXT      columns to scale
+  -a, --apply [log|sqrt]  apply whith calculation for scaling
+  --csv                   load as csv
+  --tsv                   load as tsv
+  --help                  Show this message and exit.
 ```
 
 ## Example
+
+### Plain
 
 ```
 $ echo """name,score
@@ -35,4 +38,18 @@ name,score
 Sato,1.0
 Kimura,0.0
 Suzuki,0.6
+```
+
+### Use log scale
+
+```
+echo """name      value
+kyoto   10000
+gifu    100
+gumma   1
+""" | uroko-cli -c value -a log --tsv
+name    value
+kyoto   1.0
+gifu    0.4604718013624446
+gumma   0.0
 ```
