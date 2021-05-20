@@ -17,10 +17,21 @@ from uroko import min_max_scale
     type=str,
     multiple=True
 )
-def main(input: TextIO, output: TextIO, columns: Iterable[str]):
+@option('--csv', 'delimiter', flag_value=",", default=True)
+@option('--tsv', 'delimiter', flag_value="\t")
+def main(
+    input: TextIO,
+    output: TextIO,
+    columns: Iterable[str],
+    delimiter: str
+) -> None:
     columns = list(columns)
-    reader = csv.DictReader(input)
-    writer = csv.DictWriter(output, fieldnames=reader.fieldnames)
+    reader = csv.DictReader(input, delimiter=delimiter)
+    writer = csv.DictWriter(
+        output,
+        delimiter=delimiter,
+        fieldnames=reader.fieldnames
+    )
     scaled = min_max_scale(
         reader,
         value_keys=columns,
