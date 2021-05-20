@@ -6,6 +6,8 @@ Data scaling tool for CSV/TSV
 
 "uroko" means scale in Japanese.
 
+Input CSV/TSV data, output min-max scaled data with some functions.
+
 ## Usage
 
 ```

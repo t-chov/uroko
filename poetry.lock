@@ -283,6 +283,20 @@ mccabe = "*"
 pytest = ">=5.4.0"
 
 [[package]]
+name = "pytest-mock"
+version = "3.6.1"
+description = "Thin-wrapper around the mock package for easier use with pytest"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+pytest = ">=5.0"
+
+[package.extras]
+dev = ["pre-commit", "tox", "pytest-asyncio"]
+
+[[package]]
 name = "pytest-mypy"
 version = "0.8.1"
 description = "Mypy static type checker plugin for Pytest"
@@ -339,7 +353,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4"
-content-hash = "fa18453fefc5fdf41861f8f96572453e0dfb261f2a4bef13e6f936d6e4963208"
+content-hash = "ac5a2332bbb6cc7262d60cb065d2e70f200557671896ede0b03557b14bec8ca5"
 
 [metadata.files]
 atomicwrites = [
@@ -533,6 +547,10 @@ pytest-flake8 = [
 pytest-mccabe = [
     {file = "pytest-mccabe-2.0.tar.gz", hash = "sha256:050a1f1c145202ea87f0c0ad7b529f088098040fe2eb8e5d797d36be86e0fa20"},
     {file = "pytest_mccabe-2.0-py2.py3-none-any.whl", hash = "sha256:9b1708efd52b8724dedcfe48ec668ab5bda2f7ffb1c85a2edcd4f36541307d04"},
+]
+pytest-mock = [
+    {file = "pytest-mock-3.6.1.tar.gz", hash = "sha256:40217a058c52a63f1042f0784f62009e976ba824c418cced42e88d5f40ab0e62"},
+    {file = "pytest_mock-3.6.1-py3-none-any.whl", hash = "sha256:30c2f2cc9759e76eee674b81ea28c9f0b94f8f0445a1b87762cadf774f0df7e3"},
 ]
 pytest-mypy = [
     {file = "pytest-mypy-0.8.1.tar.gz", hash = "sha256:1fa55723a4bf1d054fcba1c3bd694215a2a65cc95ab10164f5808afd893f3b11"},
