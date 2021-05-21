@@ -3,7 +3,6 @@ import sys
 from typing import Iterable, Optional, TextIO
 
 from click import Choice, File, argument, command, option, version_option
-
 from uroko import FUNC_ASIS, FUNC_LOG, FUNC_SQRT, min_max_scale_with_closure
 
 FUNCTIONS = {
@@ -12,7 +11,7 @@ FUNCTIONS = {
 }
 
 @command()
-@version_option(version="0.1.0")
+@version_option(version="0.2.2")
 @argument('input', type=File('r', lazy=True), default=sys.stdin)
 @argument('output', type=File('w', lazy=True), default=sys.stdout)
 @option(
